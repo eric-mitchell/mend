@@ -1,5 +1,7 @@
 # MEND: Model Editing Networks using Gradient Decomposition
 
+If you run into any issues with the code, you can open an issue and/or email me at `eric.mitchell@cs.stanford.edu`
+
 ## Setup
 
 ### Environment
@@ -45,6 +47,8 @@ If this code or paper was useful, please consider using the following citation:
 
     @article{mitchell2021fast,
         title={Fast Model Editing at Scale},
-        author={Mitchell, Eric and Lin, Charles and Bosselut, Antoine and Finn, Chelsea and Manning, Chris}
-        year={2021}
-    }
+        author={Mitchell, Eric and Lin, Charles and Bosselut, Antoine and Finn, Chelsea and Manning, Christopher D.},
+        year={2021},
+        journal={CoRR},
+        url={https://arxiv.org/pdf/2110.11309.pdf}
+    }      
