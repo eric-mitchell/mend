@@ -25,7 +25,7 @@ Unzip each sub-directory into `mend/data` and you should be good to go.
 
 Run MEND training/evaluation for distilGPT-2 on the wikitext editing problem with:
 
-    (env) $ python -m run +alg=mend +experiment=gen +model=distilgpt2
+    (env) $ python -m run +alg=mend +experiment=gen +model=distilgpt2 data.wiki_webtext=False
 
 Other valid algs include `efk` ([KnowledgeEditor](https://arxiv.org/abs/2104.08164))
 and `enn` ([Editable Neural Networks](https://arxiv.org/abs/2004.00345)). Valid experiments
