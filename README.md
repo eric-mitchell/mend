@@ -41,14 +41,23 @@ data (not zsRE data) for computing drawdown in the `qa` experiment and
 model we use (which was fine-tuned on wikitext) or the BART-base model, this behavior should be
 disabled with `data.wiki_webtext=False` or `data.zsre_nq=False`, respectively.
 
+### Multi-edit experiments
+
+For multi-edit experiments, it's important to configure batch sizing correctly. In order to run training &
+evaluation with `5` edits, for example, we pass the arguments `data.n_edits=5 batch_size=6 val_batch_size=6`.
+
+This convention is interpreted as using batches of size 6 during training and validation, with 5 of those
+batch elements being used to apply edits to the model and the remaining (1) example used to compute drawdown.
+
 ## Citing the paper
 
 If this code or paper was useful, please consider using the following citation:
 
-    @article{mitchell2021fast,
+    @inproceedings{mitchell2022fast,
         title={Fast Model Editing at Scale},
-        author={Mitchell, Eric and Lin, Charles and Bosselut, Antoine and Finn, Chelsea and Manning, Christopher D.},
-        year={2021},
-        journal={CoRR},
-        url={https://arxiv.org/pdf/2110.11309.pdf}
-    }      
+        author={Eric Mitchell and Charles Lin and Antoine Bosselut and Chelsea Finn and Christopher D Manning},
+        booktitle={International Conference on Learning Representations},
+        year={2022},
+        url={https://openreview.net/pdf?id=0DcZxeWfOPt}
+    }
+>>>>>>> Stashed changes
