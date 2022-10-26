@@ -4,8 +4,8 @@ torch
 click==7.1.2 # Spacy breaks for click>=8.0
 spacy
 allennlp
-git+git://github.com/eric-mitchell/higher@master # For in-place functional models
-git+git://github.com/eric-mitchell/transformers@master # To enable gradient disabling for some models
+git+https://github.com/eric-mitchell/higher@master # For in-place functional models
+git+https://github.com/eric-mitchell/transformers@master # To enable gradient disabling for some models
 datasets
 jsonlines
 wandb
