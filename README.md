@@ -28,10 +28,11 @@ Run MEND training/evaluation for distilGPT-2 on the wikitext editing problem wit
     (env) $ python -m run +alg=mend +experiment=gen +model=distilgpt2 data.wiki_webtext=False
 
 Other valid algs include `efk` ([KnowledgeEditor](https://arxiv.org/abs/2104.08164))
-and `enn` ([Editable Neural Networks](https://arxiv.org/abs/2004.00345)). Valid experiments
-include `fc` (FEVER fact checking) and `qa` (zsRE question-answering). Splits and rephrases
-for both come from [De Cao et. al](https://arxiv.org/abs/2104.08164). Check `config/model`
-for options for editable models (note that all models don't work for all experiments; GPT-style
+and `enn` ([Editable Neural Networks](https://arxiv.org/abs/2004.00345)). Other valid experiments
+include `fc` (FEVER fact checking) and `qa` (zsRE question-answering). Splits, rephrases, and pre-trained
+BERT and BART models **required** for running `fc` and `qa`, respectively, come from 
+[De Cao et. al](https://arxiv.org/abs/2104.08164) (see repo [here](https://github.com/nicola-decao/KnowledgeEditor)).
+Check `config/model` for options for editable models (note that all models don't work for all experiments; GPT-style
 models only work with `gen`, seq2seq models only work with `qa`, and BERT only works with `fc`).
 
 Also note that in the paper, we sample locality data from different datasets depending on the model.
