@@ -248,7 +248,7 @@ class EditTrainer(BaseTrainer):
         info_dict["acc/post"] = post_loc_dict["acc"].item()
         info_dict["nll/pre"] = pre_loc_dict["nll"].item()
         info_dict["nll/post"] = post_loc_dict["nll"].item()
-        info_dict["n_tokens/pre"] = post_loc_dict["n_tokens"]
+        info_dict["n_tokens/pre"] = pre_loc_dict["n_tokens"]
         info_dict["n_tokens/post"] = post_loc_dict["n_tokens"]
         info_dict["time/edit"] = edit_time
 
