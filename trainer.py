@@ -290,10 +290,11 @@ class EditTrainer(BaseTrainer):
             info_dict['grad'] = grad.item()
 
             self.opt.step()
+            if self.lr_opt is not None:
+                self.lr_opt.step()
             self.opt.zero_grad()
 
             if self.lr_opt is not None:
-                self.lr_opt.step()
                 self.lr_opt.zero_grad()
 
                 for lr_idx, lr in enumerate(self.model.edit_lrs):
