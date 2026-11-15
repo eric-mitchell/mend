@@ -34,13 +34,13 @@ class GradientTransform(nn.Module):
             raise ValueError("cfg.combine cannot be used with one-sided MEND variants")
 
         self.norm_init = False
-        self.register_buffer("u_mean", torch.full((x_dim,), float("nan")))
-        self.register_buffer("v_mean", torch.full((delta_dim,), float("nan")))
-        self.register_buffer("u_std", torch.full((x_dim,), float("nan")))
-        self.register_buffer("v_std", torch.full((delta_dim,), float("nan")))
-        self.register_buffer("u_s", torch.full((x_dim,), float("nan")))
-        self.register_buffer("v_s", torch.full((delta_dim,), float("nan")))
-        self.register_buffer("k", torch.full((1,), float("nan")))
+        self.register_buffer("u_mean", torch.full((x_dim,), float("nan"), dtype=torch.float64))
+        self.register_buffer("v_mean", torch.full((delta_dim,), float("nan"), dtype=torch.float64))
+        self.register_buffer("u_std", torch.full((x_dim,), float("nan"), dtype=torch.float64))
+        self.register_buffer("v_std", torch.full((delta_dim,), float("nan"), dtype=torch.float64))
+        self.register_buffer("u_s", torch.full((x_dim,), float("nan"), dtype=torch.float64))
+        self.register_buffer("v_s", torch.full((delta_dim,), float("nan"), dtype=torch.float64))
+        self.register_buffer("k", torch.full((1,), float("nan"), dtype=torch.float64))
 
         MlpClass = getattr(local_nn, cfg.mlp_class)
         LOG.info(f"Building Gradient Transform with MLP class {MlpClass}")
@@ -85,8 +85,8 @@ class GradientTransform(nn.Module):
         if self.training:
             for idx in range(u_.shape[0]):
                 if not self.norm_init:
-                    self.u_mean = u_[idx].clone().detach()
-                    self.v_mean = v_[idx].clone().detach()
+                    self.u_mean = u_[idx].clone().detach().to(torch.float64)
+                    self.v_mean = v_[idx].clone().detach().to(torch.float64)
                     self.u_s.zero_()
                     self.v_s.zero_()
                     self.k[:] = 1
@@ -102,8 +102,8 @@ class GradientTransform(nn.Module):
             self.v_std = (self.v_s / (self.k - 1)) ** 0.5
 
         if self.cfg.norm:
-            u_input = (u_ - self.u_mean) / (self.u_std + 1e-7)
-            v_input = (v_ - self.v_mean) / (self.v_std + 1e-7)
+            u_input = ((u_ - self.u_mean) / (self.u_std + 1e-7)).to(u_.dtype)
+            v_input = ((v_ - self.v_mean) / (self.v_std + 1e-7)).to(v_.dtype)
         else:
             u_input = u_
             v_input = v_
